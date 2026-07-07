@@ -1,6 +1,6 @@
 package com.sisencodigital.dashboard.filter;
 
-import com.sisencodigital.dashboard.service.JwtService;
+import com.sisencodigital.dashboard.service.impl.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

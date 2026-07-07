@@ -1,4 +1,4 @@
-package com.sisencodigital.dashboard.service;
+package com.sisencodigital.dashboard.service.impl;
 
 import com.sisencodigital.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

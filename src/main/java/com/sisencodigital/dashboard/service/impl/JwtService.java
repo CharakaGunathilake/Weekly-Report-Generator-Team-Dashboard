@@ -1,4 +1,4 @@
-package com.sisencodigital.dashboard.service;
+package com.sisencodigital.dashboard.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;

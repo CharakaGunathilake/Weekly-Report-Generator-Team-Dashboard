@@ -1,4 +1,4 @@
-package com.sisencodigital.dashboard.dto;
+package com.sisencodigital.dashboard.dto.request;
 
 
 import jakarta.validation.constraints.NotBlank;

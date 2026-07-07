@@ -1,11 +1,11 @@
-package com.sisencodigital.dashboard.dto;
+package com.sisencodigital.dashboard.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record RegistrationRequest(
+public record RegisterRequestDto(
         @NotBlank(message = "Name is required")
         @Size(min = 1, max = 100, message = "Name must be 1–100 characters")
         @Pattern(

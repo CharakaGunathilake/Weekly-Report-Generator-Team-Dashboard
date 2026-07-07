@@ -3,20 +3,20 @@ package com.sisencodigital.dashboard.entity;
 import com.sisencodigital.dashboard.enums.UserRole;
 import com.sisencodigital.dashboard.enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
+@Builder
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +27,7 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+    private Instant lastLoginAt;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
@@ -46,7 +47,11 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return !status.equals(UserStatus.INACTIVE);
+        if (lastLoginAt == null) return !status.equals(UserStatus.INACTIVE);
+
+        long daysSinceLogin = Duration.between(lastLoginAt, Instant.now()).toDays();
+
+        return daysSinceLogin <= 30 && !UserStatus.INACTIVE.equals(status);
     }
 
     @Override

@@ -37,7 +37,10 @@ public class JwtFilter extends OncePerRequestFilter {
         // Skip JWT filter for Swagger and OpenAPI endpoints
         if (path.startsWith("/v3/api-docs") ||
                 path.startsWith("/swagger-ui") ||
-                path.equals("/swagger-ui.html")) {
+                path.equals("/swagger-ui.html") ||
+                path.startsWith("/api/v1/auth") ||
+                path.startsWith("/actuator")
+        ) {
             chain.doFilter(request, response);
             return;
         }

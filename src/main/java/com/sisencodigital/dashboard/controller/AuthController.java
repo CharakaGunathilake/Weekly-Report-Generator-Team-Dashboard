@@ -5,7 +5,6 @@ import com.sisencodigital.dashboard.dto.request.RegisterRequestDto;
 import com.sisencodigital.dashboard.dto.response.LoginResponseDto;
 import com.sisencodigital.dashboard.dto.response.RegisterResponseDto;
 import com.sisencodigital.dashboard.service.AuthService;
-import com.sisencodigital.dashboard.service.UserService;
 import com.sisencodigital.dashboard.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

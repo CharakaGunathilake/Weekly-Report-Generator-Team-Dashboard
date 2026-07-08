@@ -1,7 +1,6 @@
 package com.sisencodigital.dashboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,10 +20,6 @@ public abstract class BaseEntity implements Serializable {
     @SequenceGenerator(name = "id_generator", sequenceName = "id_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
     private Long id;
-
-    @Version
-    @JsonIgnore
-    private long version;
 
     @Column(name = "created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
@@ -49,12 +44,11 @@ public abstract class BaseEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof BaseEntity that)) return false;
         return id.equals(that.id) &&
-                version == that.version &&
                 Objects.equals(createdAt, that.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, version, createdAt);
+        return Objects.hash(id, createdAt);
     }
 }

@@ -3,7 +3,7 @@ package com.sisencodigital.dashboard.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record LoginRequestDto(
+public record LoginRequest(
         @NotBlank(message = "Username is required")
         String username,
         @NotBlank(message = "Password is required")

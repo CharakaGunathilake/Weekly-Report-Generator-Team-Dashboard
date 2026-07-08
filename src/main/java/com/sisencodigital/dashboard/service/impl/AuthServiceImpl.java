@@ -1,9 +1,9 @@
 package com.sisencodigital.dashboard.service.impl;
 
-import com.sisencodigital.dashboard.dto.request.LoginRequestDto;
-import com.sisencodigital.dashboard.dto.request.RegisterRequestDto;
-import com.sisencodigital.dashboard.dto.response.LoginResponseDto;
-import com.sisencodigital.dashboard.dto.response.RegisterResponseDto;
+import com.sisencodigital.dashboard.dto.request.LoginRequest;
+import com.sisencodigital.dashboard.dto.request.RegisterRequest;
+import com.sisencodigital.dashboard.dto.response.LoginResponse;
+import com.sisencodigital.dashboard.dto.response.RegisterResponse;
 import com.sisencodigital.dashboard.entity.User;
 import com.sisencodigital.dashboard.enums.UserRole;
 import com.sisencodigital.dashboard.enums.UserStatus;
@@ -31,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public RegisterResponseDto register(RegisterRequestDto registerRequestDto) {
+    public RegisterResponse register(RegisterRequest registerRequestDto) {
         String email = registerRequestDto.email().trim();
         String role = registerRequestDto.role().trim();
 
@@ -64,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
 //                savedUser.getId()
 //        ));
 
-        return new RegisterResponseDto(
+        return new RegisterResponse(
                 savedUser.getId(),
                 savedUser.getName(),
                 savedUser.getEmail(),
@@ -74,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
+    public LoginResponse login(LoginRequest loginRequestDto) {
         String email = loginRequestDto.username().toLowerCase().trim();
         String password = loginRequestDto.password().trim();
 
@@ -101,7 +101,7 @@ public class AuthServiceImpl implements AuthService {
 //                user.getId()
 //        ));
 
-        return new LoginResponseDto(
+        return new LoginResponse(
                 token,
                 user.getUsername(),
                 user.getRole().name()

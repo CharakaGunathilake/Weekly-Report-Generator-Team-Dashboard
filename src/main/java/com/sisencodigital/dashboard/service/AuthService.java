@@ -1,11 +1,11 @@
 package com.sisencodigital.dashboard.service;
 
-import com.sisencodigital.dashboard.dto.request.LoginRequestDto;
-import com.sisencodigital.dashboard.dto.request.RegisterRequestDto;
-import com.sisencodigital.dashboard.dto.response.LoginResponseDto;
-import com.sisencodigital.dashboard.dto.response.RegisterResponseDto;
+import com.sisencodigital.dashboard.dto.request.LoginRequest;
+import com.sisencodigital.dashboard.dto.request.RegisterRequest;
+import com.sisencodigital.dashboard.dto.response.LoginResponse;
+import com.sisencodigital.dashboard.dto.response.RegisterResponse;
 
 public interface AuthService {
-    RegisterResponseDto register(RegisterRequestDto registerRequestDto);
-    LoginResponseDto login(LoginRequestDto loginRequestDto);
+    RegisterResponse register(RegisterRequest registerRequestDto);
+    LoginResponse login(LoginRequest loginRequestDto);
 }

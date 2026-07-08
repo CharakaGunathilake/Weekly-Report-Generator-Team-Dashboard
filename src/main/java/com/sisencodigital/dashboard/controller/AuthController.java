@@ -1,9 +1,9 @@
 package com.sisencodigital.dashboard.controller;
 
-import com.sisencodigital.dashboard.dto.request.LoginRequestDto;
-import com.sisencodigital.dashboard.dto.request.RegisterRequestDto;
-import com.sisencodigital.dashboard.dto.response.LoginResponseDto;
-import com.sisencodigital.dashboard.dto.response.RegisterResponseDto;
+import com.sisencodigital.dashboard.dto.request.LoginRequest;
+import com.sisencodigital.dashboard.dto.request.RegisterRequest;
+import com.sisencodigital.dashboard.dto.response.LoginResponse;
+import com.sisencodigital.dashboard.dto.response.RegisterResponse;
 import com.sisencodigital.dashboard.service.AuthService;
 import com.sisencodigital.dashboard.util.ApiResponse;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ApiResponse<RegisterResponseDto> register(@RequestBody @Valid RegisterRequestDto request) {
+    public ApiResponse<RegisterResponse> register(@RequestBody @Valid RegisterRequest request) {
         return ApiResponse.success(
                 201,
                 "Sign Up successfully",
@@ -31,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto request) {
+    public ApiResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
         return ApiResponse.success(
                 HttpStatus.OK.value(),
                 "Login successful",

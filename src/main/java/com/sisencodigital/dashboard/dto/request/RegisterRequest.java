@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record RegisterRequestDto(
+public record RegisterRequest(
         @NotBlank(message = "Name is required")
         @Size(min = 1, max = 100, message = "Name must be 1–100 characters")
         @Pattern(

@@ -1,7 +1,6 @@
 package com.sisencodigital.dashboard.exceptions;
 
-import com.sisencodigital.dashboard.exceptions.custom.InvalidUserRoleException;
-import com.sisencodigital.dashboard.exceptions.custom.UserAlreadyExistsException;
+import com.sisencodigital.dashboard.exceptions.custom.*;
 import com.sisencodigital.dashboard.util.ApiError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -113,11 +112,43 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.FORBIDDEN)
                 .body(ApiError.error(
                         "Forbidden",
-                        ex.getMessage() + ": You do not have permission to access this resource.",
+                        ex.getMessage(),
                         null
                 ));
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiError<Void>> handleResourceNotFound(ResourceNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiError.error(
+                        "Resource Not Found",
+                        ex.getMessage(),
+                        null
+                ));
+    }
+
+    @ExceptionHandler(WeekCodeAlreadyExistsException.class)
+    public ResponseEntity<ApiError<Void>> handleWeekCodeAlreadyExistError(WeekCodeAlreadyExistsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiError.error(
+                        "WeekCode Already Exists",
+                        ex.getMessage(),
+                        null
+                ));
+    }
+
+    @ExceptionHandler(ReportAlreadyExists.class)
+    public ResponseEntity<ApiError<Void>> handleReportAlreadyExistError(ReportAlreadyExists ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiError.error(
+                        "Report Already Exists",
+                        ex.getMessage(),
+                        null
+                ));
+    }
 
     // Handles Business/Runtime exceptions
     @ExceptionHandler(RuntimeException.class)

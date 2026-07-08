@@ -12,9 +12,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"projects", "reports"})
 @Entity
 @Builder
 @Table(name = "users")
@@ -34,6 +36,10 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserStatus status;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Report> reports;
+    @ManyToMany(mappedBy = "teamMembers", fetch = FetchType.LAZY)
+    private Set<Project> projects;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -48,9 +54,7 @@ public class User extends BaseEntity implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
         if (lastLoginAt == null) return !status.equals(UserStatus.INACTIVE);
-
         long daysSinceLogin = Duration.between(lastLoginAt, Instant.now()).toDays();
-
         return daysSinceLogin <= 30 && !UserStatus.INACTIVE.equals(status);
     }
 
@@ -62,5 +66,17 @@ public class User extends BaseEntity implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return getId() != null && getId().equals(user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

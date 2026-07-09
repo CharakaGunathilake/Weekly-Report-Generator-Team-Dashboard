@@ -7,6 +7,7 @@ import com.sisencodigital.dashboard.service.ProjectService;
 import com.sisencodigital.dashboard.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +56,7 @@ public class ProjectController {
     public ApiResponse<Void> deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
         return ApiResponse.success(
-                200,
+                HttpStatus.NO_CONTENT.value(),
                 "Project deleted successfully",
                 null
         );

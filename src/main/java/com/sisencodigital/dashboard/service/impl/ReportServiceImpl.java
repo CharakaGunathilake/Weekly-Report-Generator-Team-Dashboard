@@ -119,7 +119,7 @@ public class ReportServiceImpl implements ReportService {
             report.setHoursWorked(request.hoursWorked());
         }
 
-        if (request.isSubmitted() != null) {
+        if (request.isSubmitted() != null && report.getSubmittedAt() == null) {
             final boolean before = report.getWeekEndDate().before(new Date());
             if (Boolean.TRUE.equals(request.isSubmitted())) {
                 report.setStatus(before ? ReportStatus.LATE : ReportStatus.SUBMITTED);
